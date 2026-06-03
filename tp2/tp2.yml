@@ -6,7 +6,7 @@
   become_user: root
 
   tasks:
-    - name: Install apache2 mysql-server
+    - name: Install apache2 mysql-server on Ubuntu
       ansible.builtin.apt:
         update_cache: true
         name: "{{ item }}"
@@ -14,6 +14,17 @@
       loop:
         - apache2
         - mysql-server
+      when: ansible_facts.distribution == "Ubuntu"
+
+    - name: Install apache2 mariadb-server on Debian
+      ansible.builtin.apt:
+        update_cache: true
+        name: "{{ item }}"
+        state: present
+      loop:
+        - apache2
+        - mariadb-server
+      when: ansible_facts.distribution == "Debian"
 
     - name: Gather the rpm package facts
       ansible.builtin.package_facts:
