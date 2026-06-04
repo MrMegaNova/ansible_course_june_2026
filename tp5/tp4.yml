@@ -1,0 +1,8 @@
+---
+vars:
+  docker_users:
+    - vagrant
+
+roles:
+    - geerlingguy.docker
+    - geerlingguy.clamav
